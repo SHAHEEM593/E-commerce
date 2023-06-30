@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="cart-page">
+    <div class="container">
+        <div class="cart-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="product-h">Product</th>
+                        <th>Price</th>
+                        <th class="quan">Quantity</th>
+                        <th>Total</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart_items %}
+                    <tr>
+                        <td class="product-col">
+                            <img src="{{ item.product.product_image.url }}" alt="">
+                            <div class="p-title">
+                                <h5>{{ item.product.product_name }}</h5>
+                            </div>
+                        </td>
+                        <td class="price-col">{{ item.product.product_price }}</td>
+                        <td class="quantity-col">
+                            <div class="pro-qty">
+                                <a href="{% url 'reduce_cart' item.product.id %}">
+                                    <button class="qty-btn qty-minus">-</button>
+                                </a>
+                                <input type="number" value="{{ item.quantity }}" readonly>
+                                <a href="{% url 'add_cart' item.product.id %}">
+                                    <button class="qty-btn qty-plus">+</button>
+                                </a>
+                            </div>
+                        </td>
+                        <td class="total">{{item.total_price }}</td>
+                        <td class="remove-col">
+                            <a href="{% url 'reduce_cart' item.id %}">
+                                <i class="fa fa-close"></i>
+                            </a>
+                        </td>
+                        
+                    </tr>
+                    {% endfor %}
+                    
+                </tbody>
+            </table>
+        </div>
+        <div class="cart-btn">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="total-cost">
+                        <h6>Total <span id="cart-total">${{ total_cost }}</span></h6>
+                    </div>
+                    
+                </div>
+                <div class="col-lg-4 card-right">
+                    <a href="checkout" class="site-btn">Proceed to checkout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

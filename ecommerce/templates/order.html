@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% block content %}
+  <table>
+    <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>User Profile</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for order in orders %}
+        <tr>
+          <td>ID OF THE ORDER:   {{ order.id }}</td>
+          <td>NAME OF THE BUYER:  {{ order.user_profile }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <h6>GO BACK TO THE PREVIOUS PAGE </h6>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} {% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% for order in orders %}
+  <h2>Order ID: {{ order.id }}</h2>
+  <h2>Order ID: {{ order.user_profile }}</h2>
+  <h2>Order ID: {{ order.name }}</h2>
+  <h2>Order ID: {{ order.name.product_price}}</h2>
+
+{% endfor %}
+  {% for item in cart_items %}
+  <h5>{{ item.quantity }}</h5>
+  {% endfor %}
+{% endblock %} {% endcomment %}
+
+
+  {% comment %} <ul>
+    {% for cart_item in cart_items %}
+      <li>{{ cart_item.product.product_name }} - {{ cart_item.quantity }}</li>
+    {% endfor %}
+  </ul> {% endcomment %}
+
+  {% comment %} <ul> {% endcomment %}
+    {% comment %} {% for cart_item in order.cart_items.all %}
+      <li>{{ cart_item.product.product_name }} - {{ cart_item.quantity }}</li>
+    {% endfor %}
+  </ul>  {% endcomment %}
+{% comment %} {% endfor %}
+{% endblock %} {% endcomment %}
+{% comment %} <div class="cart-page">
+    <div class="container">
+        <h3>YOUR ORDERS</h3>
+        <div class="cart-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="product-h">Product</th>
+                        <th>Price</th>
+                        <th class="quan">Quantity</th>
+                        <th>Total</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                {% for item in cart_items %}
+                <tr>
+                    <td class="product-col">
+                        <img src="{{ item.product.product_image.url }}" alt="">
+                        <div class="p-title">
+                            <h5>{{ item.product.product_name }}</h5>
+                        </div>
+                    </td>
+                    <td class="price-col">{{ item.product.product_price }}</td>
+                    <td class="quantity-col">
+                    <input type="number" value="{{ item.quantity }}" readonly>
+   
+                     </td>
+                     <td class="total">{{item.total_price }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %} {% endcomment %}

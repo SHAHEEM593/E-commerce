@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .single-product-item {
+        height: 60%;
+        width: 60%;
+    }
+
+    .single-product-item figure {
+        height: 60%;
+        width: 60%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .single-product-item img {
+        max-width: 60%;
+        max-height: 60%;
+    }
+</style>
+
+<section class="latest-products spad">
+    <div class="container">
+        <div class="product-filter">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="section-title">
+                        <h2>Products</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="product-list">
+            {% for p in product %}
+            <div class="col-lg-3 col-md-4 col-sm-6 mix all dresses bags">
+                <div class="single-product-item">
+                    <figure>
+                        <a href="{{ p.get_url }}"><img src="{{ p.product_image.url }}" alt=""></a>
+                        <div class="p-status">new</div>
+                    </figure>
+                    <div class="product-text">
+                        <h6>{{ p.product_name }}</h6>
+                        <p>{{ p.product_price }}</p>
+                        <p>Stock: {{ p.stock }}</p>
+                        {% if user.is_authenticated %}
+                            {% if p.stock > 0 %}
+                                <form action="{% url 'add_to_cart' p.id %}" method="POST">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-primary">Add to Cart</button>
+                                </form>
+                            {% else %}
+                                <p>Out of stock</p>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} {% extends 'base.html' %}
+{% block content %}
+<section class="latest-products spad">
+    <div class="container">
+        <div class="product-filter">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="section-title">
+                        <h2>Products</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="product-list">
+            {% for p in product %}
+            <div class="col-lg-3 col-sm-6 mix all dresses bags">
+                <div class="single-product-item">
+                    <figure>
+                        <a href="{{ p.get_url }}"><img src="{{ p.product_image.url }}" alt=""></a>
+                        <div class="p-status">new</div>
+                    </figure>
+                    <div class="product-text">
+                        <h6>{{ p.product_name }}</h6>
+                        <p>{{ p.product_price }}</p>
+                        <p>Stock: {{ p.stock }}</p>
+                        {% if user.is_authenticated %}
+                            {% if p.stock > 0 %}
+                                <form action="{% url 'add_to_cart' p.id %}" method="POST">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-primary">Add to Cart</button>
+                                </form>
+                            {% else %}
+                                <p>Out of stock</p>
+                            {% endif %}
+                        {% else %}
+                            <form action="login" method="POST">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-primary">Add to Cart</button>
+                            </form>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
+ {% endcomment %}
